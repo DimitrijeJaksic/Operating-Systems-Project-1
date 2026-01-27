@@ -7,56 +7,51 @@ This is the first project for our Operating Systems course at Florida State Univ
  3. Enhance understanding of command-line parsing techniques and strategies.
  4.  Design and implement error handling mechanisms to gracefully handle various types of errors that may occur during shell execution.
 
-
-# Shell
-
-[Description]
-
 ## Group Members
-- **John Doe**: jd19@fsu.edu
-- **Jane Smith**: js19@fsu.edu
-- **Alex Brown**: ab19@fsu.edu
+- **Aldo Caceres**: ac22t@fsu.edu
+- **Noah Seay**: example@fsu.edu
+- **Dimitrije Jaksic**: example@fsu.edu
 ## Division of Labor
 
 ### Part 1: Prompt
-- **Responsibilities**: [Description]
-- **Assigned to**: John Doe
+- **Responsibilities**: Coding/Implementing and Testing
+- **Assigned to**: Aldo Caceres
 
 ### Part 2: Environment Variables
-- **Responsibilities**: [Description]
-- **Assigned to**: Jane Smith
+- **Responsibilities**: Coding/Implementing and Testing
+- **Assigned to**: Aldo Caceres
 
 ### Part 3: Tilde Expansion
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown
+- **Assigned to**: Dimitrije Jaksic
 
 ### Part 4: $PATH Search
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, Jane Smith
+- **Assigned to**: Noah Seay
 
 ### Part 5: External Command Execution
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, Jane Smith
+- **Assigned to**: Noah Seay
 
 ### Part 6: I/O Redirection
 - **Responsibilities**: [Description]
-- **Assigned to**: Jane Smith
+- **Assigned to**: Dimitrije Jaksic
 
 ### Part 7: Piping
 - **Responsibilities**: [Description]
-- **Assigned to**: John Doe
+- **Assigned to**: Dimitrije Jaksic, Aldo Caceres
 
 ### Part 8: Background Processing
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, John Doe
+- **Assigned to**: Aldo Caceres
 
 ### Part 9: Internal Command Execution
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown
+- **Assigned to**: Dimitrije Jaksic
 
 ### Part 10: External Timeout Executable
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, Jane Smith
+- **Assigned to**: Aldo Caceres, Noah Seay, Dimitrije Jaksic
 
 ### Extra Credit
 - **Responsibilities**: [Description]
@@ -68,10 +63,10 @@ shell/
 │
 ├── src/
 │ ├── main.c
-│ └── shell.c
+│ └── lexer.c
 │
 ├── include/
-│ └── shell.h
+│ └── lexer.h
 │
 ├── README.md
 └── Makefile
@@ -79,8 +74,8 @@ shell/
 ## How to Compile & Execute
 
 ### Requirements
-- **Compiler**: e.g., `gcc` for C/C++, `rustc` for Rust.
-- **Dependencies**: List any libraries or frameworks necessary (rust only).
+- **Compiler**: 'gcc' version 13.3.0
+- **Dependencies**: None
 
 ### Compilation
 For a C/C++ example:
@@ -93,6 +88,44 @@ This will build the executable in ...
 make run
 ```
 This will run the program ...
+
+## Development Log
+Each member records their contributions here.
+
+### Aldo Caceres
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| 2026-01-26 | Completed Part 1 and Part 2  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+
+### Noah Seay
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+
+
+### Dimitrije Jaksic 
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+
+
+## Meetings
+Document in-person meetings, their purpose, and what was discussed.
+
+| Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
+|------------|----------------------|------------------|-----------------------|
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+
 
 ## Bugs
 - **Bug 1**: This is bug 1.
