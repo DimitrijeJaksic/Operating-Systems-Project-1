@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
+#include <sys/wait.h>
 
 void print_prompt(void)
 {
@@ -79,6 +80,40 @@ char *search_path(const char *command) {
     return NULL;
 }
 
+/**
+ * Executes an external command using fork/exec.
+ */
+void execute_command(char *cmd_path, tokenlist *tokens) {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+        return;
+    }
+
+    if (pid == 0) {
+        // Child process: build argv and execute
+        char **argv = malloc((tokens->size + 1) * sizeof(char *));
+        if (argv == NULL) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+
+        for (size_t i = 0; i < tokens->size; i++) {
+            argv[i] = tokens->items[i];
+        }
+        argv[tokens->size] = NULL;
+
+        execv(cmd_path, argv);
+        perror("execv");
+        free(argv);
+        exit(EXIT_FAILURE);
+    } else {
+        // Parent process: wait for child
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
 
 int main(void) {
     while (1)
@@ -92,21 +127,14 @@ int main(void) {
             break;
         }
 
-        printf("whole input: %s\n", input);
-
         tokenlist *tokens = get_tokens(input);
 
         expand_tokens(tokens);
-        
-        for (size_t i = 0; i < tokens->size; i++) {
-            printf("token %zu: (%s)\n", i, tokens->items[i]);
-        }
 
-        // Search for command in PATH (if tokens exist)
         if (tokens->size > 0) {
             char *cmd_path = search_path(tokens->items[0]);
             if (cmd_path != NULL) {
-                printf("Found command at: %s\n", cmd_path);
+                execute_command(cmd_path, tokens);
                 free(cmd_path);
             } else {
                 printf("%s: command not found\n", tokens->items[0]);
@@ -116,4 +144,6 @@ int main(void) {
         free(input);
         free_tokens(tokens);
     }
+
+    return 0;
 }
