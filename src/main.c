@@ -1,3 +1,5 @@
+#include <pwd.h>
+
 #include "lexer.h"
 #include <string.h>
 #include <stdio.h>
@@ -5,6 +7,8 @@
 #include <unistd.h>
 #include <limits.h>
 #include <sys/wait.h>
+
+static char *expand_tilde(const char *tok);
 
 void print_prompt(void)
 {
@@ -23,7 +27,14 @@ void print_prompt(void)
 void expand_tokens(tokenlist *tokens) {
     for (size_t i = 0; i < tokens->size; i++) {
         char *tok = tokens->items[i];
-        if (tok[0] == '$') {
+       
+	if(tok[0]=='~'){  //Tilde Expansion
+	 char *newtok = expand_tilde(tok);
+	 free(tokens->items[i]);
+	 tokens->items[i]=newtok;
+	 tok = tokens->items[i];}
+
+	 if (tok[0] == '$') {
             char *var_name = tok + 1; 
             char *value = getenv(var_name);
 
@@ -114,6 +125,31 @@ void execute_command(char *cmd_path, tokenlist *tokens) {
         waitpid(pid, &status, 0);
     }
 }
+
+static char *expand_tilde(const char *tok)
+{
+	//Dont expand if invalid, not ~, or not ~/
+	if(!tok || tok[0]!='~' || ( tok[1]!='\0' && tok[1]!='/' ))  
+	 return strdup(tok);
+
+
+
+	const char *home=getenv("HOME");
+/*	if(!home || home[0]=='\0'){
+	 struct passwd *pw =getpwuid(getuid());
+	 if (pw) home = pw->pw_dir; }*/
+
+        if(!home || home[0]=='\0') //Unable to expand
+	 return strdup(tok);
+
+       const char *rest = (tok[1] =='/') ? (tok+1) : ""; //Check if  ~/ or ~
+	size_t length=strlen(home) + strlen(rest) +1;
+	char *out=malloc(length);
+	if(!out) return strdup(tok);  //Not enough space
+
+	strcpy(out,home);
+	strcat(out,rest);
+	return out;}
 
 int main(void) {
     while (1)

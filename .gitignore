@@ -1,0 +1,7 @@
+# compiled binary
+shell
+
+# object files
+*.o
+
+
