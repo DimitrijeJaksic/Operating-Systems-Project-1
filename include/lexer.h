@@ -8,6 +8,11 @@ typedef struct {
     size_t size;
 } tokenlist;
 
+typedef struct {
+    char *commands[3];  // Store last 3 commands
+    int count;          // Current number of commands stored
+} command_history_t;
+
 char * get_input(void);
 tokenlist * get_tokens(char *input);
 tokenlist * new_tokenlist(void);

@@ -47,7 +47,7 @@ This is the first project for our Operating Systems course at Florida State Univ
 
 ### Part 9: Internal Command Execution
 - **Responsibilities**: [Description]
-- **Assigned to**: Dimitrije Jaksic
+- **Assigned to**: Noah Seay, Aldo Caceres
 
 ### Part 10: External Timeout Executable
 - **Responsibilities**: [Description]

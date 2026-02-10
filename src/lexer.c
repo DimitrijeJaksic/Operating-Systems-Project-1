@@ -3,6 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+int lexer_main()
+{
+	while (1) {
+		printf("> ");
+
+		/* input contains the whole command
+		 * tokens contains substrings from input split by spaces
+		 */
+
+		char *input = get_input();
+		printf("whole input: %s\n", input);
+
+		tokenlist *tokens = get_tokens(input);
+		for (size_t i = 0; i < tokens->size; i++) {
+			printf("token %zu: (%s)\n", i, tokens->items[i]);
+		}
+
+		free(input);
+		free_tokens(tokens);
+	}
+
+	return 0;
+}
 
 char *get_input(void) {
 	char *buffer = NULL;
